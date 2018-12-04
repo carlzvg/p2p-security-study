@@ -9,12 +9,13 @@
     $rand_string = generateRandomString(16);
     echo $rand_string;
 
+
+    $username = "carlkwok";
     echo getPasswrod($username);
 
     function getPassword($username) {
         $sql = 'SELECT password FROM comp3334-auth WHERE username = "'.$username.'"';
         $conn->query($sql);
-
     }
     
     function generateRandomString($length = 10) {
@@ -27,4 +28,5 @@
         return $randomString;
     }
 
+    $conn->close();
 ?>
