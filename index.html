@@ -2,10 +2,11 @@
 <html>
 
 <head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="lib/jsencrypt.js"></script>
-	<script src="lib/sha256.js"></script>
-	<script src="lib/jsaes.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/jsencrypt.js"></script>
+	<script type="text/javascript" src="lib/sha256.js"></script>
+	<script type="text/javascript" src="lib/jsaes.js"></script>
+	<script type="text/javascript" src="https://cdn.rawgit.com/ricmoo/aes-js/e27b99df/index.js"></script>
 	<script>
 		function base64toHEX(base64) {
 
@@ -23,33 +24,47 @@
 			return HEX.toUpperCase();
 
 		}
-		var public_key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlOJu6TyygqxfWT7eLtGDwajtNFOb9I5XRb6khyfD1Yt3YiCgQWMNW649887VGJiGr/L5i2osbl8C9+WJTeucF+S76xFxdU6jE0NQ+Z+zEdhUTooNRaY5nZiu5PgDB0ED/ZKBUSLKL7eibMxZtMlUDHjm4gwQco1KRMDSmXSMkDwIDAQAB";
-		var private_key = "MIICXQIBAAKBgQDlOJu6TyygqxfWT7eLtGDwajtNFOb9I5XRb6khyfD1Yt3YiCgQWMNW649887VGJiGr/L5i2osbl8C9+WJTeucF+S76xFxdU6jE0NQ+Z+zEdhUTooNRaY5nZiu5PgDB0ED/ZKBUSLKL7eibMxZtMlUDHjm4gwQco1KRMDSmXSMkDwIDAQABAoGAfY9LpnuWK5Bs50UVep5c93SJdUi82u7yMx4iHFMc/Z2hfenfYEzu+57fI4fvxTQ//5DbzRR/XKb8ulNv6+CHyPF31xk7YOBfkGI8qjLoq06V+FyBfDSwL8KbLyeHm7KUZnLNQbk8yGLzB3iYKkRHlmUanQGaNMIJziWOkN+N9dECQQD0ONYRNZeuM8zd8XJTSdcIX4a3gy3GGCJxOzv16XHxD03GW6UNLmfPwenKu+cdrQeaqEixrCejXdAFz/7+BSMpAkEA8EaSOeP5Xr3ZrbiKzi6TGMwHMvC7HdJxaBJbVRfApFrE0/mPwmP5rN7QwjrMY+0+AbXcm8mRQyQ1+IGEembsdwJBAN6az8Rv7QnD/YBvi52POIlRSSIMV7SwWvSK4WSMnGb1ZBbhgdg57DXaspcwHsFV7hByQ5BvMtIduHcT14ECfcECQATeaTgjFnqE/lQ22Rk0eGaYO80cc643BXVGafNfd9fcvwBMnk0iGX0XRsOozVt5AzilpsLBYuApa66NcVHJpCECQQDTjI2AQhFc1yRnCU/YgDnSpJVm1nASoRUnU8Jfm3Ozuku7JUXcVpt08DFSceCEX9unCuMcT72rAQlLpdZir876";
+		var public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnXsMuUOkAaRZChlopLjEUr7+WnaZasAcvLO3ZRwNKltL1y0dSL9/8m9BVW4ggBpKQGg6LaA+dBndxDIKxsQE+x72npRZHCBkEQzw76VRRfAP/H5HcIMua4i5YgfLB8Rs+TO2A0RAOtYF8bJvcqcojNY9L5TWwyPxnlAl6QMKyaYDYrkuo9M2Znt+5CZp+qV2gMQS5JxE02msr54l/kVMqaenqGwFOM+bPoyf6EsrkSq3On9C1N6qWRnRifbhM6ohvgdvoQrdq2Ow3lzvLDjkV0NBVTrUiAm7H7QoFCDbEWvwOQUU7mRkOxSpnaA+HKLpn9rIpY+2TSTe7V+uhSVQjQIDAQAB";
+		var private_key = "MIIEowIBAAKCAQEAnXsMuUOkAaRZChlopLjEUr7+WnaZasAcvLO3ZRwNKltL1y0dSL9/8m9BVW4ggBpKQGg6LaA+dBndxDIKxsQE+x72npRZHCBkEQzw76VRRfAP/H5HcIMua4i5YgfLB8Rs+TO2A0RAOtYF8bJvcqcojNY9L5TWwyPxnlAl6QMKyaYDYrkuo9M2Znt+5CZp+qV2gMQS5JxE02msr54l/kVMqaenqGwFOM+bPoyf6EsrkSq3On9C1N6qWRnRifbhM6ohvgdvoQrdq2Ow3lzvLDjkV0NBVTrUiAm7H7QoFCDbEWvwOQUU7mRkOxSpnaA+HKLpn9rIpY+2TSTe7V+uhSVQjQIDAQABAoIBAQCbvRD8NrR/GzUjE7W1ETS2UEPi2t8l/w9sXp7D01YByX/bMLaBN0ElVHlcLyjdByLfRzQh4xNgZiQ23vZhU4FJh3mFolftxOqxIgc0OF2DuMFWhtvHnTPPDMuo8uQKrmrGmCksWdbbWMVQHZKx5DXp8gVYhO1O1sEgO0sCgQuuFn5JCYwzMMnA9sPOYJSJoGimiLh+pt/XcApHgGxv/7j3a1nNm5xWSpYmS+h0VDEWJ/c1vEZryaChJVWqUls6Ld0TQVPAZ9F4GFZq/RYiNXbzfU7mjLDeVsfxQk9/fBWHDhugNHv+cDVRvqvJGPYxYyuY5WB+SfmCZ0q+f+jGnaUBAoGBANGl7x8PxqnntKKmx6yzOj83N63pPlnlo/CzZDYHL7IsXhxxFQy3P+8XwBW3jbh9ze2O9EJXWzuuD+F1ex7BeottPAjOi9ztYKg9Ff0PjMWWgT3hdBNQBS2IQ9hnh9jHXjtQ4VIDLtytHa+ZJNSAPfdvZP8W/5+DYB/0TntwbP69AoGBAMBMcH0E0n9f6xHf6gxY03/wEfe2+R9fyEl83w8CdZ0NZMcDfu+Wb8mJBEEBh0h4hdRgHjSk8umHvCE3y5q1RDVhiFYlmniM7mvSepcL1OToNVMtZBrOWhEneWilbSU5t996OMow2knBO/ulUYffob0iWOZ4q7UZHFWJFdjzS14RAoGAXiQqJYObDS68AZHs9hMhY8Oy4Aht9EZXgL29kTlW5KZhuFnbPvOG5SGAIwBixmbPsw5Phv7dPAZkoTR1DhGJqtRpcfb1/UYm8kVD+3ghGZUFAjmcOxPiz1hyRtnuuZyFJxOhqoc9YuDmBLU7QaU4rkS6UIYOUZ3X62F0YJ/Sge0CgYAsKmI7lHv0HUeUF2Vd6JjK7Yxy5GdbOVh66F8ix2HT7FuVCcyBon+SPhHoDD3R+zxhhqHpXWkdEbu3tWTh53f++qOhhYlw3o1z3iehwWnoGR0GOYqgTXyKLBLKYhQrVJJSlXOtnILGJcdtCI8tMcOn+NeKN3TYZygGzTFjXp2UwQKBgHUwn6oBHTG5X5xmvEU3h71A08SpETUZF4EC+gdjjk4AkkTlUY3CyAEkFUqjOT0FFTHgAyOpyuNGo+gDOIP9hU/48Wxn4RxdI7CWe4uKMTDigKLp+pQJ0wmV2YeJBzVQaBAFGf6YvYNAz+bpXrjyrOjRWWwRWxMO2e3mnd0g44Ms";
+
 		var fw = "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824";
+
 		var key = new Array(32);
 		for (var i = 0; i < 32; i++) {
 			key[i] = parseInt(fw[2 * i] + fw[2 * i + 1], 16);
 		}
-		hexpublickey=base64toHEX(public_key);
-		var block = new Array(hexpublickey.length/2);
+		hexpublickey = base64toHEX(public_key);
+		var block = new Array(hexpublickey.length / 2);
+		for (var i = 0; i < hexpublickey.length / 2; i++)block[i] = parseInt(hexpublickey[i * 2] + hexpublickey[i * 2 + 1], 16);
+		while (block.length % 16 != 0) block.push(0)
 
-		for (var i = 0; i < hexpublickey.length/2; i++)block[i] =parseInt(hexpublickey[i*2]+hexpublickey[i*2+1],16);
-		AES_Init();
-		AES_ExpandKey(key);
-		AES_Encrypt(block, key);
-		AES_Done();
+
+		var iv = [21, 22, 23, 24, 25, 26, 27, 28,
+			29, 30, 31, 32, 33, 34, 35, 36];
+		var aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
+		var encryptedBytes = aesCbc.encrypt(block);
+		var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+		var encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
+		var aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
+		var decryptedBytes = aesCbc.decrypt(encryptedBytes);
+		var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+		console.log(encryptedHex);
+		// AES_Init();
+		// AES_ExpandKey(key);
+		// AES_Encrypt(block, key);
+		// AES_Done();
 	</script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 
 <body>
 
-<form class="container" method="post" action="lib/auth.php">
-  Username:<br>
-  <input type="text" name="uid"><br>
-  Last name:<br>
-  <input type="password" name="pwd">
-</form>
+	<form class="container" method="post" action="lib/auth.php">
+		Username:<br>
+		<input type="text" name="uid"><br>
+		Last name:<br>
+		<input type="password" name="pwd">
+	</form>
 </body>
 
 </html>
