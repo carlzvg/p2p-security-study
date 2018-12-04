@@ -1,5 +1,5 @@
 <?php
-    include ("database.php");
+    #include ("database.php");
     header("Content-Type: application/json");
     $parameters = json_decode(stripslashes(file_get_contents("php://input")), true);
     #require('sha256.php');
@@ -7,13 +7,27 @@
     #$encw = $parameters['encw'];
 
     $rand_string = generateRandomString(16);
-    echo $rand_string;
 
-    getPassword();
+    echo getPassword('carlkwok');
 
-    function getPassword($username = "carlkwok") {
-        $sql = 'SELECT password FROM comp3334auth WHERE username = "carlkwok"';
-        $queryresult = $conn->query($sql);
+    function getPassword($uid) {
+        /* Database connection settings */
+        $host = 'mysql.comp.polyu.edu.hk';
+        $username = '16086542d';
+        $password = 'bkgqihss';
+        $database = '16086542d';
+        $conn = new mysqli($host, $username, $password, $database);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        try {
+            $sql = 'SELECT password FROM comp3334auth WHERE username = "'.$uid.'"';
+            $queryresult = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+            return $queryresult[0]['password'];
+        } catch (Exception $e) {
+            echo "error ".$e;
+        }
     }
     
     function generateRandomString($length = 10) {
