@@ -15,8 +15,8 @@
 
     function getPassword($username = "carlkwok") {
         $sql = 'SELECT password FROM comp3334auth WHERE username = "'.$username.'"';
-        $conn->query($sql);
-
+        $queryresult = $conn->query($sql);
+        
     }
     
     function generateRandomString($length = 10) {
