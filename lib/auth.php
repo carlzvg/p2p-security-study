@@ -1,7 +1,10 @@
 <?php
+    include ("database.php");
+    header("Content-Type: application/json");
+    $parameters = json_decode(stripslashes(file_get_contents("php://input")), true);
     #require('sha256.php');
-    #$uid = $_POST['uid'];
-    #$encw = $_POST['encw'];
+    #$uid = $parameters['uid'];
+    #$encw = $parameters['encw'];
 
     $rand_string = generateRandomString(16);
     echo $rand_string;
@@ -15,5 +18,5 @@
         }
         return $randomString;
     }
-    
+
 ?>
