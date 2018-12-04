@@ -11,11 +11,12 @@
 
 
     $username = "carlkwok";
-    echo getPasswrod($username);
+    echo getPassword($username);
 
-    function getPassword($username) {
-        $sql = 'SELECT password FROM comp3334-auth WHERE username = "'.$username.'"';
+    function getPassword($username = "carlkwok") {
+        $sql = 'SELECT password FROM comp3334auth WHERE username = "'.$username.'"';
         $conn->query($sql);
+
     }
     
     function generateRandomString($length = 10) {
