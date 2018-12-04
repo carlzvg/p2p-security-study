@@ -9,7 +9,7 @@
     $rand_string = generateRandomString(16);
     echo $rand_string;
 
-    echo getPasswrod($);
+    echo getPasswrod($username);
 
     function getPassword($username) {
         $sql = 'SELECT password FROM comp3334-auth WHERE username = "'.$username.'"';
