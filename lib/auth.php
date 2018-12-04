@@ -1,7 +1,7 @@
 <?php
-    require('sha256.php');
-    $uid = $_POST['uid'];
-    $encw = $_POST['encw'];
+    #require('sha256.php');
+    #$uid = $_POST['uid'];
+    #$encw = $_POST['encw'];
 
     $rand_string = generateRandomString(16);
     echo $rand_string;
