@@ -9,14 +9,11 @@
     $rand_string = generateRandomString(16);
     echo $rand_string;
 
-
-    $username = "carlkwok";
-    echo getPassword($username);
+    getPassword();
 
     function getPassword($username = "carlkwok") {
-        $sql = 'SELECT password FROM comp3334auth WHERE username = "'.$username.'"';
+        $sql = 'SELECT password FROM comp3334auth WHERE username = "carlkwok"';
         $queryresult = $conn->query($sql);
-        
     }
     
     function generateRandomString($length = 10) {
@@ -28,6 +25,4 @@
         }
         return $randomString;
     }
-
-    $conn->close();
 ?>
